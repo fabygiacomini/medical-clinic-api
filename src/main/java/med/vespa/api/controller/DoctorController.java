@@ -1,5 +1,6 @@
 package med.vespa.api.controller;
 
+import jakarta.validation.Valid;
 import med.vespa.api.doctor.CreateDoctorDTO;
 import med.vespa.api.doctor.Doctor;
 import med.vespa.api.doctor.DoctorRepository;
@@ -19,7 +20,7 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    public void create(@RequestBody CreateDoctorDTO data) {
+    public void create(@RequestBody @Valid CreateDoctorDTO data) {
         repository.save(new Doctor(data));
     }
 }
