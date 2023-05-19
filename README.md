@@ -7,3 +7,6 @@
 - MySQL/Flyway
 - JPA/Hibernate
 - Maven
+
+## The Project
+- (Kanban)[https://trello.com/b/ZWK1Wiwl/api-vespa-med]
