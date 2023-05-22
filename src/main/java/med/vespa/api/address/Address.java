@@ -25,4 +25,30 @@ public class Address {
         this.city = data.city();
         this.complement = data.complement();
     }
+
+    public void update(AddressDTO data) {
+        if (data.street() != null) {
+            this.street = data.street();
+        }
+
+        if (data.number() != null) {
+            this.number = data.number();
+        }
+
+        if (data.zip() != null) {
+            this.zip = data.zip();
+        }
+
+        if (data.state() != null) {
+            this.state = data.state();
+        }
+
+        if (data.city() != null) {
+            this.city = data.city();
+        }
+
+        if (data.complement() != null) {
+            this.complement = data.complement();
+        }
+    }
 }
