@@ -9,4 +9,4 @@
 - Maven
 
 ## The Project
-- (Kanban)[https://trello.com/b/ZWK1Wiwl/api-vespa-med]
+- [Kanban](https://trello.com/b/ZWK1Wiwl/api-vespa-med)
