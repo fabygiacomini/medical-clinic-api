@@ -9,8 +9,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -26,7 +24,7 @@ public class DoctorController {
 
     @GetMapping
     public Page<ListDoctorsDTO> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
-        return repository.findAll(pageable).map(ListDoctorsDTO::new);
+        return repository.findAllByActiveTrue(pageable).map(ListDoctorsDTO::new);
     }
 
     @PutMapping
@@ -34,5 +32,12 @@ public class DoctorController {
     public void update(@RequestBody @Valid UpdateDoctorDTO data) {
         var doctor = repository.getReferenceById(data.id());
         doctor.update(data); // automatically changed by JPA entity inside the transaction
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id) {
+        var doctor = repository.getReferenceById(id);
+        doctor.delete();
     }
 }
