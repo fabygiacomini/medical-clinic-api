@@ -1,11 +1,11 @@
-package med.vespa.api.doctor;
+package med.vespa.api.domain.doctor;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import med.vespa.api.address.AddressDTO;
+import med.vespa.api.domain.address.AddressDTO;
 
 public record CreateDoctorDTO(
         @NotBlank

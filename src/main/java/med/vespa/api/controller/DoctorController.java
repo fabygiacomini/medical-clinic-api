@@ -1,7 +1,10 @@
 package med.vespa.api.controller;
 
 import jakarta.validation.Valid;
-import med.vespa.api.doctor.*;
+import med.vespa.api.domain.doctor.*;
+import med.vespa.api.domain.doctor.Doctor;
+import med.vespa.api.domain.doctor.DoctorRepository;
+import med.vespa.api.domain.doctor.ListDoctorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

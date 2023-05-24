@@ -1,4 +1,4 @@
-package med.vespa.api.address;
+package med.vespa.api.domain.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

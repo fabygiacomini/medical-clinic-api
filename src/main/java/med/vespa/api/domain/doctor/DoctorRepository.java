@@ -1,4 +1,4 @@
-package med.vespa.api.doctor;
+package med.vespa.api.domain.doctor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
