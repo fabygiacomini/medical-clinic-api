@@ -1,4 +1,4 @@
-package med.vespa.api.address;
+package med.vespa.api.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

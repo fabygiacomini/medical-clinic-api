@@ -1,4 +1,4 @@
-package med.vespa.api.doctor;
+package med.vespa.api.domain.doctor;
 
 public record ListDoctorsDTO(
         Long id,

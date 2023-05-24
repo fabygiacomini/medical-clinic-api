@@ -1,11 +1,11 @@
-package med.vespa.api.doctor;
+package med.vespa.api.domain.doctor;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.vespa.api.address.Address;
+import med.vespa.api.domain.address.Address;
 
 @Table(name = "doctors") // JPA annotations
 @Entity(name = "Doctor")

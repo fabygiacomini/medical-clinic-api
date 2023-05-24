@@ -1,6 +1,6 @@
-package med.vespa.api.doctor;
+package med.vespa.api.domain.doctor;
 
-import med.vespa.api.address.Address;
+import med.vespa.api.domain.address.Address;
 
 public record DoctorDetailsDTO(
         Long id,
