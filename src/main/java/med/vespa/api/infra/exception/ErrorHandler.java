@@ -1,4 +1,4 @@
-package med.vespa.api.infra;
+package med.vespa.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
