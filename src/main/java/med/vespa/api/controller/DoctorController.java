@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,9 +34,11 @@ public class DoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListDoctorsDTO>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
-        var page = repository.findAllByActiveTrue(pageable).map(ListDoctorsDTO::new);
-        return ResponseEntity.ok(page);
+    public ResponseEntity list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
+        return ResponseEntity.ok(BCrypt.gensalt("123456"));
+
+//        var page = repository.findAllByActiveTrue(pageable).map(ListDoctorsDTO::new);
+//        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
