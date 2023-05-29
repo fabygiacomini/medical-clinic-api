@@ -1,22 +1,20 @@
 package med.vespa.api.controller;
 
 import jakarta.validation.Valid;
-import med.vespa.api.domain.patient.CreatePatientDTO;
-import med.vespa.api.domain.patient.Patient;
-import med.vespa.api.domain.patient.PatientDetailsDTO;
-import med.vespa.api.domain.patient.PatientRepository;
+import med.vespa.api.domain.patient.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
 
+    @Autowired
     private PatientRepository repository;
 
     @PostMapping
@@ -28,5 +26,19 @@ public class PatientController {
         var uri = uriBuilder.path("/patient/{id}").buildAndExpand(patient.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new PatientDetailsDTO(patient));
+    }
+
+    @GetMapping
+    public ResponseEntity list(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
+        var page = repository.findAll(pageable).map(ListPatientsDTO::new);
+
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity details(@PathVariable Long id) {
+        var patient = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new PatientDetailsDTO(patient));
     }
 }
