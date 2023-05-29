@@ -6,7 +6,6 @@ import med.vespa.api.domain.doctor.Doctor;
 import med.vespa.api.domain.doctor.DoctorRepository;
 import med.vespa.api.domain.doctor.ListDoctorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class DoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListDoctorsDTO>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
+    public ResponseEntity list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
         var page = repository.findAllByActiveTrue(pageable).map(ListDoctorsDTO::new);
         return ResponseEntity.ok(page);
     }
