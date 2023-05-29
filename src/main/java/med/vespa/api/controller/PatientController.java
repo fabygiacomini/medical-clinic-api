@@ -30,7 +30,7 @@ public class PatientController {
 
     @GetMapping
     public ResponseEntity list(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
-        var page = repository.findAll(pageable).map(ListPatientsDTO::new);
+        var page = repository.findAllByActiveTrue(pageable).map(ListPatientsDTO::new);
 
         return ResponseEntity.ok(page);
     }
@@ -40,5 +40,23 @@ public class PatientController {
         var patient = repository.getReferenceById(id);
 
         return ResponseEntity.ok(new PatientDetailsDTO(patient));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid UpdatePatientDTO data) {
+        var patient = repository.getReferenceById(data.id());
+        patient.update(data);
+
+        return ResponseEntity.ok(new PatientDetailsDTO(patient));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        var patient = repository.getReferenceById(id);
+        patient.delete();
+
+        return ResponseEntity.noContent().build();
     }
 }
