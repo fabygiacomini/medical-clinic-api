@@ -1,11 +1,14 @@
 package med.vespa.api.domain.appointment;
 
 import jakarta.validation.ValidationException;
+import med.vespa.api.domain.appointment.validations.AppointmentScheduleValidator;
 import med.vespa.api.domain.doctor.Doctor;
 import med.vespa.api.domain.doctor.DoctorRepository;
 import med.vespa.api.domain.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AppointmentScheduleService {
@@ -19,6 +22,9 @@ public class AppointmentScheduleService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private List<AppointmentScheduleValidator> validators; // automatically injects every validator that implements this interface
+
     public void schedule(AppointmentScheduleDTO data) {
         if (!patientRepository.existsById(data.patientId())) {
             throw new ValidationException("Patient id does not exists!");
@@ -27,6 +33,8 @@ public class AppointmentScheduleService {
         if (data.doctorId() != null && !doctorRepository.existsById(data.doctorId())) {
             throw new ValidationException("Doctor id does not exists!");
         }
+
+        validators.forEach(validator -> validator.validate(data)); // loop in every validator
 
         var patient = patientRepository.getReferenceById(data.patientId());
         var doctor = chooseDoctor(data);
