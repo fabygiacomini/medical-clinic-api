@@ -27,6 +27,7 @@ public class SecurityConfigurations {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // not use form to login
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated() // any request, except login, should be authenticated
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // set to call out filter before spring authentication filter
                 .build();
