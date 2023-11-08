@@ -19,7 +19,7 @@ public class ActiveDoctorValidator implements AppointmentScheduleValidator {
 
         var isDoctorActive = repository.findActiveById(data.doctorId());
         if (!isDoctorActive) {
-            throw  new ValidationException("Consulta não pode ser agendada com médico excluído");
+            throw  new ValidationException("Appointment cannot be scheduled with an inactive doctor.");
         }
     }
 }

@@ -16,7 +16,7 @@ public class ActivePatientValidator implements AppointmentScheduleValidator {
         var activePatient = repository.findActiveById(data.patientId());
 
         if (!activePatient) {
-            throw new ValidationException("Consulta não pode ser agendada com paciente excluído");
+            throw new ValidationException("appointment cannot be scheduled for an inactive patient.");
         }
     }
 }

@@ -20,7 +20,7 @@ public class OpeningHoursValidator implements AppointmentScheduleValidator {
         var afterClosingHour = appointmentDate.getHour() > this.CLOSING_HOUR;
 
         if (sunday || beforeOpeningHours || afterClosingHour) {
-            throw new ValidationException("Consulta fora do horário de funcionamento da clínica");
+            throw new ValidationException("Appointment outside clinic opening hours.");
         }
     }
 }

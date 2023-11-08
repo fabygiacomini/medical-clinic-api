@@ -25,7 +25,7 @@ public class AppointmentScheduleService {
     @Autowired
     private List<AppointmentScheduleValidator> validators; // automatically injects every validator that implements this interface
 
-    public void schedule(AppointmentScheduleDTO data) {
+    public AppointmentDetailsDTO schedule(AppointmentScheduleDTO data) {
         if (!patientRepository.existsById(data.patientId())) {
             throw new ValidationException("Patient id does not exists!");
         }
@@ -38,8 +38,14 @@ public class AppointmentScheduleService {
 
         var patient = patientRepository.getReferenceById(data.patientId());
         var doctor = chooseDoctor(data);
+        if (doctor == null) {
+            throw new ValidationException("There is no doctor available in this date.");
+        }
+
         var appointment = new Appointment(null, doctor, patient, data.date(), null);
         appointmentRepository.save(appointment);
+
+        return new AppointmentDetailsDTO(appointment);
     }
 
     private Doctor chooseDoctor(AppointmentScheduleDTO data) {

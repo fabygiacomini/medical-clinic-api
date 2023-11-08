@@ -19,7 +19,7 @@ public class DoctorAlreadyWithAppointmentValidator implements AppointmentSchedul
         );
 
         if (doctorAlreadyWithAppointment) {
-            throw new ValidationException("Médico já possui outra consulta agendada nesse mesmo horário");
+            throw new ValidationException("The doctor already has another appointment scheduled at the same time.");
         }
     }
 }

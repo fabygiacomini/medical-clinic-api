@@ -26,7 +26,7 @@ public class PatientAlreadyWithAppointment implements AppointmentScheduleValidat
         );
 
         if (patientAlreadyWithAppointmentInSameDay) {
-            throw new ValidationException("Paciente já possui uma consulta agendada nesse dia.");
+            throw new ValidationException("The patient already has another appointment scheduled at the same time.");
         }
     }
 
