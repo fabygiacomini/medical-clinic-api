@@ -1,4 +1,4 @@
-package med.vespa.api.domain.appointment.validations;
+package med.vespa.api.domain.appointment.validations.appointment;
 
 import med.vespa.api.domain.appointment.AppointmentScheduleDTO;
 

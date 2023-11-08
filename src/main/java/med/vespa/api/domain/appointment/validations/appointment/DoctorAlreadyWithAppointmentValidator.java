@@ -1,4 +1,4 @@
-package med.vespa.api.domain.appointment.validations;
+package med.vespa.api.domain.appointment.validations.appointment;
 
 import jakarta.validation.ValidationException;
 import med.vespa.api.domain.appointment.AppointmentRepository;
@@ -13,7 +13,7 @@ public class DoctorAlreadyWithAppointmentValidator implements AppointmentSchedul
     private AppointmentRepository repository;
 
     public void validate(AppointmentScheduleDTO data) {
-        var doctorAlreadyWithAppointment = repository.existsByDoctorIdAndDate(
+        var doctorAlreadyWithAppointment = repository.existsByDoctorIdAndDateAndCancellationReasonIsNull(
                 data.doctorId(),
                 data.date()
         );

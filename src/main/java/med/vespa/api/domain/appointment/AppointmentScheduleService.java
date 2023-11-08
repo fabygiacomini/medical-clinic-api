@@ -1,7 +1,8 @@
 package med.vespa.api.domain.appointment;
 
 import jakarta.validation.ValidationException;
-import med.vespa.api.domain.appointment.validations.AppointmentScheduleValidator;
+import med.vespa.api.domain.appointment.validations.appointment.AppointmentScheduleValidator;
+import med.vespa.api.domain.appointment.validations.cancellation.AppointmentCancellationValidator;
 import med.vespa.api.domain.doctor.Doctor;
 import med.vespa.api.domain.doctor.DoctorRepository;
 import med.vespa.api.domain.patient.PatientRepository;
@@ -24,6 +25,9 @@ public class AppointmentScheduleService {
 
     @Autowired
     private List<AppointmentScheduleValidator> validators; // automatically injects every validator that implements this interface
+
+    @Autowired
+    private List<AppointmentCancellationValidator> cancellationValidators;
 
     public AppointmentDetailsDTO schedule(AppointmentScheduleDTO data) {
         if (!patientRepository.existsById(data.patientId())) {
@@ -64,6 +68,8 @@ public class AppointmentScheduleService {
         if (!appointmentRepository.existsById(data.id())) {
             throw new ValidationException("Appointment id does not exists!");
         }
+
+        cancellationValidators.forEach(validator -> validator.validate(data));
 
         var appointment = appointmentRepository.getReferenceById(data.id());
         appointment.cancel(data.reason());

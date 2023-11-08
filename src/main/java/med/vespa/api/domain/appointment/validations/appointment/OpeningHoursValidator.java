@@ -1,4 +1,4 @@
-package med.vespa.api.domain.appointment.validations;
+package med.vespa.api.domain.appointment.validations.appointment;
 
 import jakarta.validation.ValidationException;
 import med.vespa.api.domain.appointment.AppointmentScheduleDTO;

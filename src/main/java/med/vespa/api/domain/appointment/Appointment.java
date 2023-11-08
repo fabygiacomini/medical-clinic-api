@@ -34,9 +34,9 @@ public class Appointment {
 
     @Column(name = "cancellation_reason")
     @Enumerated(EnumType.STRING)
-    private CancellationReason reason;
+    private CancellationReason cancellationReason;
 
-    public void cancel(CancellationReason reason) {
-        this.reason = reason;
+    public void cancel(CancellationReason cancellationReason) {
+        this.cancellationReason = cancellationReason;
     }
 }
