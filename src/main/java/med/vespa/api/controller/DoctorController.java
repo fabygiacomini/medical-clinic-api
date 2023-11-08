@@ -1,5 +1,6 @@
 package med.vespa.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.vespa.api.domain.doctor.*;
 import med.vespa.api.domain.doctor.Doctor;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
 
     @Autowired // dependency injection

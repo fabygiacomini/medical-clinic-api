@@ -10,3 +10,7 @@
 
 ## The Project
 - [Kanban](https://trello.com/b/ZWK1Wiwl/api-vespa-med)
+
+## Api Docs
+- http://localhost:8080/v3/api-docs
+- http://localhost:8080/swagger-ui/index.html
