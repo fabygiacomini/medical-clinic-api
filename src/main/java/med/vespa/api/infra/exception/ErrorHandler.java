@@ -1,6 +1,7 @@
 package med.vespa.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -24,6 +25,11 @@ public class ErrorHandler {
     public ResponseEntity handle400(MethodArgumentNotValidException exception) {
         var errors = exception.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(ValidationErrorDTO::new).toList());
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity handleValidationException(ValidationException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
