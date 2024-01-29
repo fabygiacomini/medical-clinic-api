@@ -61,12 +61,13 @@ public class AppointmentControllerTest {
         var appointmentDetails = new AppointmentDetailsDTO(null, 2l, 5l, date);
         when(appointmentScheduleService.schedule(any())).thenReturn(appointmentDetails);
 
-        var response = mock.perform(
-                post("/appointment")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(appointmentScheduleDataJson.write(
-                                new AppointmentScheduleDTO(2l, 5l, specialty, date)
-                        ).getJson())
+        var response = mock
+                .perform(
+                        post("/appointment")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(appointmentScheduleDataJson.write(
+                                        new AppointmentScheduleDTO(2l, 5l, specialty, date)
+                                ).getJson())
                 )
                 .andReturn().getResponse();
 
