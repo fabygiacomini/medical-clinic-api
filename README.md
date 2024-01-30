@@ -14,3 +14,10 @@
 ## Api Docs
 - http://localhost:8080/v3/api-docs
 - http://localhost:8080/swagger-ui/index.html
+
+## Execution
+After generate de `.jar` file (`mvn clean package`), we can execute the application informing the profile we wanted (defaul use application.properties), and we
+can pass environment variables as well, like this:
+```shell
+java -Dspring.profiles.active=prod -DDATASOURCE_URL=jdbc:mysql://localhost:3306/clinic -DDATASOURCE_USERNAME=root -DDATASOURCE_PASSWORD=root -jar target/api-0.0.1-SNAPSHOT.jar
+```
